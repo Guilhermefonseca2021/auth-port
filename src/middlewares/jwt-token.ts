@@ -1,14 +1,14 @@
 import jwt, { JwtPayload } from "jsonwebtoken";
+import auth from "../config/auth";
 
-class WebToken {
+class JwtToken {
   private secretKey: string;
-
+  
   constructor(secretKey: string) {
     this.secretKey = secretKey;
   }
-
   // Gera um token JWT com o payload fornecido
-  signToken(payload: object): string {
+  public signToken(payload: object): string {
     return jwt.sign(payload, this.secretKey, { expiresIn: "21d" });
   }
 
@@ -23,4 +23,5 @@ class WebToken {
   }
 }
 
+const WebToken = new JwtToken(auth.secret_key as string) 
 export default WebToken;
